@@ -1,3 +1,4 @@
 # SQL
-Oracle SQL query   
-PL/SQL procedure
+week 1-2 : Oracle SQL query   
+week 3 : PL/SQL procedure   
+week 4 : Java DataBase Connection
