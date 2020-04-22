@@ -1,4 +1,4 @@
--- 코드를 입력하세요
+-- https://programmers.co.kr/learn/courses/30/lessons/59042
 SELECT ANIMAL_ID, NAME FROM ANIMAL_OUTS b 
     WHERE NOT EXISTS (SELECT ANIMAL_ID, NAME FROM ANIMAL_INS a
         WHERE a.ANIMAL_ID = b.ANIMAL_ID) ORDER BY ANIMAL_ID;
