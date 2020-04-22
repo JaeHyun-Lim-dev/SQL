@@ -1,0 +1,5 @@
+-- https://programmers.co.kr/learn/courses/30/lessons/59412
+SELECT HOUR, COUNT(*) FROM (
+    SELECT TO_CHAR(DATETIME, 'HH24') AS HOUR FROM ANIMAL_OUTS
+) WHERE (HOUR <= 19 AND HOUR >= 9)
+GROUP BY HOUR ORDER BY HOUR;
