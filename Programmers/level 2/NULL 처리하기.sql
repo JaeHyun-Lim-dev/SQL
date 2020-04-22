@@ -1,0 +1,4 @@
+-- https://programmers.co.kr/learn/courses/30/lessons/59410
+SELECT ANIMAL_TYPE,
+    CASE WHEN NAME IS NOT NULL THEN NAME ELSE 'No name' END,
+    SEX_UPON_INTAKE FROM ANIMAL_INS a ORDER BY ANIMAL_ID;
