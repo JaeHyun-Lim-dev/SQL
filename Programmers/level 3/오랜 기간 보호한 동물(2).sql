@@ -1,0 +1,6 @@
+-- https://programmers.co.kr/learn/courses/30/lessons/59411
+SELECT * FROM (SELECT b.ANIMAL_ID, b.NAME FROM ANIMAL_INS a
+    FULL OUTER JOIN ANIMAL_OUTS b
+    ON a.ANIMAL_ID = b.ANIMAL_ID
+    ORDER BY (a.DATETIME - b.DATETIME)
+) WHERE ROWNUM <= 2;
