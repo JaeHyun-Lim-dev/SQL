@@ -1,10 +1,10 @@
--- PK Áßº¹ÀÌ ¾ø´Â °æ¿ìÀÇ TEST01, TEST02 µ¥ÀÌÅÍ´Â STAT_CD¿Í FA_ID¸¸ º¯È¯ÇÏ¿© ÅëÇÕ
-/* (PKÁßº¹) TEST02ÀÇ µ¥ÀÌÅÍ·Î ÅëÇÕµÇ´Â °æ¿ì : (TEST01.STAT_TYP, TEST02.STAT_TYP)°¡ °¢°¢
+-- PK ì¤‘ë³µì´ ì—†ëŠ” ê²½ìš°ì˜ TEST01, TEST02 ë°ì´í„°ëŠ” STAT_CDì™€ FA_IDë§Œ ë³€í™˜í•˜ì—¬ í†µí•©
+/* (PKì¤‘ë³µ) TEST02ì˜ ë°ì´í„°ë¡œ í†µí•©ë˜ëŠ” ê²½ìš° : (TEST01.STAT_TYP, TEST02.STAT_TYP)ê°€ ê°ê°
 (LOADING, RESERVE)
 (PROCESS, SELECT)
 (RESERVE, PROCESS)
 (SELECT, LOADING)
-ÀÎ °æ¿ìÀÌ°í, ³ª¸ÓÁö´Â TEST01·Î ÅëÇÕ
+ì¸ ê²½ìš°ì´ê³ , ë‚˜ë¨¸ì§€ëŠ” TEST01ë¡œ í†µí•©
 */
 
 INSERT INTO TEST03.TBL_LT_HIS C
@@ -34,7 +34,7 @@ WITH R AS (
     AND A.PROD_ID = B.PROD_ID
     AND A.TIMEKEY = B.TIMEKEY
     )
-    --TEST01 µ¥ÀÌÅÍ ³Ö´Â Äõ¸®
+    --TEST01 ë°ì´í„° ë„£ëŠ” ì¿¼ë¦¬
     SELECT CASE FA_ID_M1 WHEN 'F12' THEN 'F11' ELSE FA_ID_M1 END,
         LT_ID_M1, PROD_ID_M1, TIMEKEY_M1, FL_ID_M1, OP_ID_M1, 
         CASE STAT_CD_M1 WHEN 'SHIP' THEN 'SHIPPED' WHEN 'SCRP' THEN 'SCRAPPED' 
@@ -44,7 +44,7 @@ WITH R AS (
     WHERE FA_ID_M1 IS NOT NULL
     AND FA_ID_M2 IS NULL
     UNION ALL
-    --TEST02 µ¥ÀÌÅÍ ³Ö´Â Äõ¸®
+    --TEST02 ë°ì´í„° ë„£ëŠ” ì¿¼ë¦¬
     SELECT CASE FA_ID_M2 WHEN 'F12' THEN 'F11' ELSE FA_ID_M2 END, 
         LT_ID_M2, PROD_ID_M2, TIMEKEY_M2, FL_ID_M2, OP_ID_M2, 
         CASE STAT_CD_M2 WHEN 'SHIP' THEN 'SHIPPED' WHEN 'SCRP' THEN 'SCRAPPED' 
@@ -54,7 +54,7 @@ WITH R AS (
     WHERE FA_ID_M1 IS NULL
     AND FA_ID_M2 IS NOT NULL
     UNION ALL
-    --PKÁßº¹ ¹ß»ý, TEST02 ¿ì¼±ÇØ¼­ ÅëÇÕÇÏ´Â °æ¿ì
+    --PKì¤‘ë³µ ë°œìƒ, TEST02 ìš°ì„ í•´ì„œ í†µí•©í•˜ëŠ” ê²½ìš°
     SELECT FA_ID_M2, LT_ID_M2, PROD_ID_M2, TIMEKEY_M2, FL_ID_M2, OP_ID_M2, 
         CASE STAT_CD_M2 WHEN 'SHIP' THEN 'SHIPPED' WHEN 'SCRP' THEN 'SCRAPPED' 
         WHEN 'RELE' THEN 'RELEASED' ELSE STAT_CD_M1 END,
@@ -67,7 +67,7 @@ WITH R AS (
         OR (STAT_TYP_M1 = 'RESERVE' AND STAT_TYP_M2 = 'PROCESS')
         OR (STAT_TYP_M1 = 'SELEECT' AND STAT_TYP_M2 = 'LOADING'))
     UNION ALL 
-    --PKÁßº¹ ¹ß»ý, TEST01 ¿ì¼±ÇØ¼­ ÅëÇÕÇÏ´Â °æ¿ì
+    --PKì¤‘ë³µ ë°œìƒ, TEST01 ìš°ì„ í•´ì„œ í†µí•©í•˜ëŠ” ê²½ìš°
     SELECT FA_ID_M1, LT_ID_M1, PROD_ID_M1, TIMEKEY_M1, FL_ID_M1, OP_ID_M1, 
         CASE STAT_CD_M1 WHEN 'SHIP' THEN 'SHIPPED' WHEN 'SCRP' THEN 'SCRAPPED' 
         WHEN 'RELE' THEN 'RELEASED' ELSE STAT_CD_M1 END, 
@@ -84,11 +84,11 @@ WITH R AS (
     
 /* 
 JOIN : 
-NL JOIN : INDEX Á¸Àç, A°¡ ¼±ÇàÅ×ÀÌºíÀÌ¶ó¸é A_IDX°¡ ¹Ýµå½Ã Á¸Àç, B´Â IDX ¹«°ü, A_IDX¿¡¼­ µ¥ÀÌÅÍ Ã£°í A¿¡ RANDOM ACSESS, B¿Í °°´Ù¸é ÁýÇÕ¿¡ ÀúÀåÇØ ÁýÇÕ RETURN
-        >> JOINÀÌ ¸¹À¸¸é ÀÚ¿¬½º·´°Ô ¼º´ÉÀúÇÏ, µ¥ÀÌÅÍ ¾çÀÌ ÀûÀ» ¶§ ºü¸¥ Æí
+NL JOIN : INDEX ì¡´ìž¬, Aê°€ ì„ í–‰í…Œì´ë¸”ì´ë¼ë©´ A_IDXê°€ ë°˜ë“œì‹œ ì¡´ìž¬, BëŠ” IDX ë¬´ê´€, A_IDXì—ì„œ ë°ì´í„° ì°¾ê³  Aì— RANDOM ACSESS, Bì™€ ê°™ë‹¤ë©´ ì§‘í•©ì— ì €ìž¥í•´ ì§‘í•© RETURN
+        >> JOINì´ ë§Žìœ¼ë©´ ìžì—°ìŠ¤ëŸ½ê²Œ ì„±ëŠ¥ì €í•˜, ë°ì´í„° ì–‘ì´ ì ì„ ë•Œ ë¹ ë¥¸ íŽ¸
 NESTED LOOPS :
-SORT MERGE : A, B¸¦ Á¤·ÄÇØ MERGE
-HASH JOIN : EQUI JOIN¿¡ »ç¿ë(FAC_ID >= B.FAC_ID ¿Í °°Àº NON-EQUI¿¡´Â »ç¿ëºÒ°¡), ºó¹øÇÏ°Ô »ç¿ë ½Ã HASH Å×ÀÌºíÀÇ »çÀÌÁî°¡ ÀÓ½ÃÀúÀå°ø°£º¸´Ù Ä¿Áú ¼ö ÀÖÀ¸¹Ç·Î Á¶½É
-WITH R AS: HASH JOIN°ú °°ÀÌ TEMPORARY¿µ¿ª »ç¿ëÇÏ¹Ç·Î µ¿½Ã¿¡ ¿©·¯¹ø »ç¿ëÇÏÁö ¾Êµµ·Ï Á¶½É, FROMÀý ¾È¿¡ »ç¿ëµÉ °æ¿ì INLINE VIEWÀÌ¹Ç·Î ¹«°ü, DATA MIGRATION¿¡ ÁÖ·Î ÀÌ¿ë
+SORT MERGE : A, Bë¥¼ ì •ë ¬í•´ MERGE
+HASH JOIN : EQUI JOINì— ì‚¬ìš©(FAC_ID >= B.FAC_ID ì™€ ê°™ì€ NON-EQUIì—ëŠ” ì‚¬ìš©ë¶ˆê°€), ë¹ˆë²ˆí•˜ê²Œ ì‚¬ìš© ì‹œ HASH í…Œì´ë¸”ì˜ ì‚¬ì´ì¦ˆê°€ ìž„ì‹œì €ìž¥ê³µê°„ë³´ë‹¤ ì»¤ì§ˆ ìˆ˜ ìžˆìœ¼ë¯€ë¡œ ì¡°ì‹¬
+WITH R AS: HASH JOINê³¼ ê°™ì´ TEMPORARYì˜ì—­ ì‚¬ìš©í•˜ë¯€ë¡œ ë™ì‹œì— ì—¬ëŸ¬ë²ˆ ì‚¬ìš©í•˜ì§€ ì•Šë„ë¡ ì¡°ì‹¬, FROMì ˆ ì•ˆì— ì‚¬ìš©ë  ê²½ìš° INLINE VIEWì´ë¯€ë¡œ ë¬´ê´€, DATA MIGRATIONì— ì£¼ë¡œ ì´ìš©
 */
 -- SELECT /*+APPEND*/ ~~ : DIRECT PATH LOADING
