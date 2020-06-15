@@ -1,6 +1,6 @@
--- TBL_LT_INFÀÇ PK (FA_ID, LT_ID, PROD_ID)
+-- TBL_LT_INFì˜ PK (FA_ID, LT_ID, PROD_ID)
 /*
--- UNION (NOT EXISTS) (76000°³ Çà Ãâ·Â)
+-- UNION (NOT EXISTS) (76000ê°œ í–‰ ì¶œë ¥)
 SELECT COUNT(*) FROM (
 SELECT * FROM TEST01.TBL_LT_INF a
     UNION ALL
@@ -10,7 +10,7 @@ SELECT * FROM TEST02.TBL_LT_INF b
     AND a.LT_ID = b.LT_ID
     AND a.PROD_ID = b.PROD_ID));
 
--- PKÁßº¹ÀÌ ¾ø´Â TEST01ÀÇ µ¥ÀÌÅÍ È®ÀÎ (Áßº¹ 1000°³ Á¦¿ÜÇÏ°í 37000°³ Çà Ãâ·Â)
+-- PKì¤‘ë³µì´ ì—†ëŠ” TEST01ì˜ ë°ì´í„° í™•ì¸ (ì¤‘ë³µ 1000ê°œ ì œì™¸í•˜ê³  37000ê°œ í–‰ ì¶œë ¥)
 SELECT a.*
     FROM TEST01.TBL_LT_INF a
     WHERE NOT EXISTS (SELECT b.* FROM TEST02.TBL_LT_INF b
@@ -18,7 +18,7 @@ SELECT a.*
         AND a.LT_ID = b.LT_ID
         AND a.PROD_ID = b.PROD_ID)
 ;
--- PKÁßº¹ÀÌ ¾ø´Â TEST02ÀÇ µ¥ÀÌÅÍ È®ÀÎ (Áßº¹ 1000°³ Á¦¿ÜÇÏ°í 38000°³ Çà Ãâ·Â)
+-- PKì¤‘ë³µì´ ì—†ëŠ” TEST02ì˜ ë°ì´í„° í™•ì¸ (ì¤‘ë³µ 1000ê°œ ì œì™¸í•˜ê³  38000ê°œ í–‰ ì¶œë ¥)
 SELECT COUNT(*) FROM (
 SELECT b.*
     FROM TEST02.TBL_LT_INF b
@@ -29,9 +29,9 @@ SELECT b.*
 ;
 */
 
--- PKÁßº¹ÀÌ ¾ø´Â TEST01ÀÇ ÄÃ·³°ú PKÁßº¹ÀÌ ¾ø´Â TEST02ÀÇ ÄÃ·³Àº F12ÀÎ °æ¿ì F11·Î º¯È¯ÇØ¼­,
--- PKÁßº¹ÀÎ ÄÃ·³Àº TEST01ÀÇ µ¥ÀÌÅÍ·Î TEST03¿¡ INSERT
--- 76000°³ µ¥ÀÌÅÍ INSERT
+-- PKì¤‘ë³µì´ ì—†ëŠ” TEST01ì˜ ì»¬ëŸ¼ê³¼ PKì¤‘ë³µì´ ì—†ëŠ” TEST02ì˜ ì»¬ëŸ¼ì€ F12ì¸ ê²½ìš° F11ë¡œ ë³€í™˜í•´ì„œ,
+-- PKì¤‘ë³µì¸ ì»¬ëŸ¼ì€ TEST01ì˜ ë°ì´í„°ë¡œ TEST03ì— INSERT
+-- 76000ê°œ ë°ì´í„° INSERT
 
 INSERT INTO TEST03.TBL_LT_INF c
 SELECT CASE FA_ID
@@ -61,8 +61,8 @@ SELECT a.* FROM TEST01.TBL_LT_INF a, TEST02.TBL_LT_INF b
 ;
 
 /*
--- PK Áßº¹ ¾øÀÌ FA_ID = 'F12'ÀÎ °æ¿ì
--- TEST01¿¡ ´ëÇØ 2¸¸ °Ç, TEST02¿¡ ´ëÇØ 2¸¸ °Ç, ÃÑ 2¸¸°³ÀÇ ÇàÀÌ º¯È¯ ´ë»óÀÓÀ» ±³Â÷È®ÀÎ
+-- PK ì¤‘ë³µ ì—†ì´ FA_ID = 'F12'ì¸ ê²½ìš°
+-- TEST01ì— ëŒ€í•´ 2ë§Œ ê±´, TEST02ì— ëŒ€í•´ 2ë§Œ ê±´, ì´ 2ë§Œê°œì˜ í–‰ì´ ë³€í™˜ ëŒ€ìƒìž„ì„ êµì°¨í™•ì¸
 SELECT COUNT(*) 
   FROM TEST02.TBL_LT_INF b
   WHERE b.FA_ID = 'F12'
